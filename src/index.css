@@ -4,3 +4,19 @@
 @theme {
   --font-inter: "Inter", sans-serif;
 }
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+::selection {
+  background-color: red; /* warna highlight */
+  color: black; /* warna teks saat di-highlight */
+  opacity: 1;
+}
