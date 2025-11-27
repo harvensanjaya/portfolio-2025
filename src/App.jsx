@@ -1,18 +1,20 @@
-import './index.css'
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import "./index.css";
 import Home from "./pages";
+import Wedding from "./pages/wedding";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <Home />
-    ),
+    element: <Home />,
+  },
+  {
+    path: "/wedding-project",
+    element: <Wedding />,
   },
 ]);
 
 function App() {
-
   return (
     <>
       <RouterProvider router={router} />
@@ -20,4 +22,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

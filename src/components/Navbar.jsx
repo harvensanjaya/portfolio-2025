@@ -4,6 +4,7 @@ import { CiInstagram } from "react-icons/ci";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { PiLinkedinLogoThin } from "react-icons/pi";
 import { VscGithubAlt } from "react-icons/vsc";
+import Logo from "./elements/logo";
 
 function Navbar() {
   const [show, setShow] = useState(false);
@@ -27,11 +28,9 @@ function Navbar() {
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="fixed top-0 left-1/2 -translate-x-1/2 w-4/5 rounded-xl flex items-center justify-between z-50 my-5"
+      className="fixed top-0 left-1/2 -translate-x-1/2 md:w-4/5 w-9/10 transition-all duration-300 rounded-xl flex items-center justify-between z-50 my-5"
     >
-      <div className="py-2 px-4 bg-white rounded-full">
-        <p className="font-inter font-bold">Harven Portfolio</p>
-      </div>
+      <Logo>Harven Portfolio</Logo>
 
       {/* DROPDOWN BUTTON */}
       <motion.button
@@ -89,17 +88,29 @@ function Navbar() {
                 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
               >
-                <div className="aspect-square rounded-full border flex items-center justify-center w-fit p-3 hover:opacity-40 transition-all duration-300 cursor-pointer">
+                <a
+                  className="aspect-square rounded-full border flex items-center justify-center w-fit p-3 hover:opacity-40 transition-all duration-300 cursor-pointer"
+                  href="https://github.com/harvensanjaya"
+                  target="blank"
+                >
                   <VscGithubAlt size={20} className="shrink-0" />
-                </div>
+                </a>
 
-                <div className="aspect-square rounded-full border flex items-center justify-center w-fit p-3 hover:opacity-40 transition-all duration-300 cursor-pointer">
+                <a
+                  className="aspect-square rounded-full border flex items-center justify-center w-fit p-3 hover:opacity-40 transition-all duration-300 cursor-pointer"
+                  href="https://www.linkedin.com/in/harven-sanjaya-76642b268/"
+                  target="blank"
+                >
                   <PiLinkedinLogoThin size={20} className="shrink-0" />
-                </div>
+                </a>
 
-                <div className="aspect-square rounded-full border flex items-center justify-center w-fit p-3 hover:opacity-40 transition-all duration-300 cursor-pointer">
+                <a
+                  className="aspect-square rounded-full border flex items-center justify-center w-fit p-3 hover:opacity-40 transition-all duration-300 cursor-pointer"
+                  href="https://www.instagram.com/harvensnjaya/"
+                  target="blank"
+                >
                   <CiInstagram size={20} className="shrink-0" />
-                </div>
+                </a>
               </motion.li>
             </motion.ul>
           </motion.div>
