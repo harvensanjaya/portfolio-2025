@@ -5,6 +5,7 @@ import { IoGrid } from "react-icons/io5";
 import { MdFolderCopy, MdOutlineArrowRightAlt } from "react-icons/md";
 import { SiSui, SiTailwindcss } from "react-icons/si";
 import { TbWorldWww } from "react-icons/tb";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import mobileApps from "../assets/mobileapps.jpg";
 import profile from "../assets/profile4.png";
@@ -65,6 +66,8 @@ const childVariant = {
 
 export default function Home() {
   // Scroll-linked animations
+  const [params] = useSearchParams();
+  const navigate = useNavigate();
   const { scrollYProgress } = useScroll();
 
   const workOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
@@ -82,10 +85,25 @@ export default function Home() {
     setShow(false); // close modal after click
   };
 
+  useEffect(() => {
+    const target = params.get("scroll");
+    if (target) {
+      const el = document.getElementById(target);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 200); // delay kecil supaya halaman load dulu
+      }
+    }
+  }, [params]);
+
   return (
     <div className="font-inter scroll-smooth bg-[#D9D9D9] tracking-tighter">
       {/* NAVBAR */}
-      <Navbar />
+      <Navbar
+        onClick={() => scrollToSection("awal")}
+        title={"Harven Portfolio"}
+      />
 
       <motion.div
         className="flex flex-col w-full md:h-[90vh] h-[70vh] items-center justify-center xl:text-8xl lg:text-7xl md:text-6xl text-5xl  transition-all duration-300 tracking-tighter bg-linear-to-tr from-[#d9d9d9] from-10% via-black/10 via-30% to-[#d9d9d9] to-90%"
@@ -168,7 +186,7 @@ export default function Home() {
           <p className="text-white">See Recent Work</p>
         </div>
 
-        <div className="w-full lg:p-15 p-10 transition-all duration-300 grid md:grid-cols-2 grid-cols-1 lg:gap-15 gap-10 -mt-50">
+        <div className="w-full lg:p-15 md:p-10 p-5 transition-all duration-300 grid md:grid-cols-2 grid-cols-1 lg:gap-15 md:gap-10 gap-5 -mt-50">
           <img src={website} alt="" className="w-full rounded-4xl" />
           <img src={mobileApps} alt="" className="w-full rounded-4xl" />
           <img src={website} alt="" className="w-full rounded-4xl" />
@@ -183,7 +201,7 @@ export default function Home() {
         </p>
 
         {/* TEXT TYPEWRITER */}
-        <motion.p
+        <motion.div
           className="xl:text-4xl md:text-3xl text-2xl transition-all duration-300 text-center md:w-1/2 w-full font-medium"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -195,7 +213,7 @@ export default function Home() {
             text="I help startups and enterprise to establish an emotional connection between their products and happy engaged customers"
             speed={30}
           />
-        </motion.p>
+        </motion.div>
 
         {/* BADGE LEFT SIDE (FROM LEFT) */}
         <motion.div
@@ -399,7 +417,7 @@ export default function Home() {
         </p>
 
         {/* TEXT TYPEWRITER */}
-        <motion.p
+        <motion.div
           className="text-4xl text-center md:w-1/2 w-full font-medium mb-20"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -411,7 +429,7 @@ export default function Home() {
             text="Recent Case Studies"
             speed={30}
           />
-        </motion.p>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 grid-cols-1 sm:gap-15 gap-10 w-full h-fit">
           <motion.div
@@ -421,13 +439,28 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 1.2 }}
           >
-            <div className="w-full aspect-4/3 bg-white rounded-4xl overflow-hidden">
-              <img
-                src={website}
-                alt=""
-                className="w-full h-full object-cover pt-10 px-10 group-hover:pt-7 group-hover:px-7 transition-all transition-discrete duration-300"
-              />
-            </div>
+            <Link
+              to={"/wedding-project"}
+              onClick={(e) => {
+                e.preventDefault();
+                // pindah halaman
+                navigate("/wedding-project");
+                // delay agar page load dulu
+                setTimeout(() => {
+                  document
+                    .getElementById("awal")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }, 100);
+              }}
+            >
+              <div className="w-full aspect-4/3 bg-white rounded-4xl overflow-hidden">
+                <img
+                  src={website}
+                  alt=""
+                  className="w-full h-full object-cover pt-10 px-10 group-hover:pt-7 group-hover:px-7 transition-all transition-discrete duration-300"
+                />
+              </div>
+            </Link>
             <div className="flex justify-between items-center mt-2">
               <p className="group-hover:text-black text-black/50 transition-all duration-300 lg:text-xl sm:text-lg text-base">
                 Wedding Invitation Website
@@ -540,7 +573,7 @@ export default function Home() {
         </p>
 
         {/* TEXT TYPEWRITER */}
-        <motion.p
+        <motion.div
           className="text-4xl text-center md:w-1/2 w-full font-medium md:mb-20 mb-10"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -552,7 +585,7 @@ export default function Home() {
             text="Pushing boundaries since 2023"
             speed={30}
           />
-        </motion.p>
+        </motion.div>
 
         <div className="flex gap-10 md:flex-row flex-col">
           <div className="flex-2 items-center justify-center flex">

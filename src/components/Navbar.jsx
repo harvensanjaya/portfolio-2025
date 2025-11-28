@@ -5,9 +5,11 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { PiLinkedinLogoThin } from "react-icons/pi";
 import { VscGithubAlt } from "react-icons/vsc";
 import Logo from "./elements/logo";
+import { useNavigate } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ title, onClick }) {
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   const menuItems = [
     { label: "Work", href: "work" },
@@ -23,6 +25,17 @@ function Navbar() {
     setShow(false); // close modal after click
   };
 
+  const handleMenuClick = (section) => {
+    if (location.pathname !== "/") {
+      // jika BUKAN di homepage → navigate ke home sambil kirim section
+      navigate(`/?scroll=${section}`);
+    } else {
+      // jika SUDAH di homepage → scroll langsung
+      const el = document.getElementById(section);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <motion.div
       initial={{ y: -50, opacity: 0 }}
@@ -30,7 +43,7 @@ function Navbar() {
       transition={{ duration: 0.4, ease: "easeOut" }}
       className="fixed top-0 left-1/2 -translate-x-1/2 md:w-4/5 w-9/10 transition-all duration-300 rounded-xl flex items-center justify-between z-50 my-5"
     >
-      <Logo>Harven Portfolio</Logo>
+      <Logo onClick={onClick}>{title}</Logo>
 
       {/* DROPDOWN BUTTON */}
       <motion.button
@@ -72,7 +85,7 @@ function Navbar() {
                   transition={{ duration: 0.3 }}
                 >
                   <button
-                    onClick={() => scrollToSection(item.href)}
+                    onClick={() => handleMenuClick(item.href)}
                     className="block w-full text-left py-1 rounded-md hover:opacity-40 text-black font-base transition-all duration-200 text-xl font-inter cursor-pointer"
                   >
                     {item.label}

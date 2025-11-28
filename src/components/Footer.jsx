@@ -17,7 +17,7 @@ function Footer() {
     <motion.div
       id="contact"
       style={{ opacity: contactOpacity, y: contactY }}
-      className="h-screen  flex items-center justify-center text-4xl font-bold p-5"
+      className="h-screen flex items-center justify-center text-4xl font-bold p-5"
     >
       <div className="rounded-4xl flex flex-col bg-linear-to-tr from-black from-10% via-black/80 via-40% to-black to-90% w-full h-full items-center justify-between sm:p-20 xs:p-10 p-5">
         <div
